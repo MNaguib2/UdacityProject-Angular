@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CartModule } from './cart/cart.module';
+import { ContentModule } from './content/content.module';
+import { coreModule } from './core.module';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [ 
+    coreModule,   
+    ContentModule,
+    CartModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

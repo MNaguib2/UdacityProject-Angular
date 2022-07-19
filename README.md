@@ -2,9 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
 
+# to Run App
+must configuration node js and npm then Install angular
+2- run in cmd `npm i`
+3- run in cmd `npm i json-server` to configuration environment database
+after this follow steps Development Server
+
+# Dependancy
+BootStrap :- `npm i bootstrap@4.0.0` 
+popper.js : - `npm i popper.js@1.12.9`
+JQuery : -`npm i jquery@3.2.1`  , `npm i @types/jquery@3.2.1 -D` To work with TypeScript
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+Run `json-server --watch src\assets\db.json` for a dev server. Navigate to `http://localhost:3000/`. the database will automatically run in file json under name db.json
 
 ## Code scaffolding
 

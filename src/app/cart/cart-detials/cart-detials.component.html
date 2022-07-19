@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 col-12 col-sm-12 p-0">
+            <div class="row">
+                <ng-template ngFor let-data [ngForOf]="marge">
+                    <div class="d-flex">
+                        <div style="width: 10vh;"></div>
+
+                        <img class="col-lg-4 col-7 col-md-6 col-sm-6 p-auto rounded"
+                            src="{{data.ProductDetials.ImageURL}}" style="margin-top: 10px; height: 20vh;">
+
+                        <div class="col-lg-5 col-md-4 col-sm-6 mt-3 p-auto">
+                            <h4>{{data.ProductDetials.Title}}</h4>
+                            <p>${{data.ProductDetials.Price}}</p>
+                            <p class="d-inline col-lg-1 col-md-2 col-sm-4 col-3 p-0">Amount </p>
+                            <input type="number" class="col-lg-6 col-md-5 col-sm-6 col-6 p-0" value="{{data.Quantaty}}"
+                                (change)="changeNumber(data, $event)">
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="col-lg-3 col-md-3 col-sm-2"></div>
+                <h1 class="col-lg-6 col-md-7 col-sm-6">Totall: $ {{totalPrice}}</h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <form #f="ngForm" style="margin-top: 10px;">
+                <div class="form-group">
+                    <label for="exampleInputName">Full Name</label>
+                    <input type="text" class="form-control" id="FullName" placeholder="(minimum 6 characters)"
+                        minlength="6" required [(ngModel)]="FullName" name="FullName">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputAddress">Address</label>
+                    <input type="text" class="form-control" id="Address" minlength="6" required [(ngModel)]="Address"
+                        name="Address" placeholder="(minimum 6 characters)">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputCredit">Credit Card Number</label>
+                    <input type="text" class="form-control" aria-describedby="CreditHelp" id="Credit"
+                        placeholder="(16-Degital Number)"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        minlength="6" required [(ngModel)]="Credit" name="Credit"
+                        oninvalid="this.setCustomValidity('Please Set Number Only')">
+                    <small id="CreditHelp" class="form-text text-muted">We'll never share your payment Detials with
+                        anyone else.</small>
+                </div>
+                <button type="button" class="btn btn-primary" [disabled]="!f.valid" data-toggle="modal" (click)="changeButton()"
+                    data-target="#exampleModal">Submit</button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title {{modelTitle}}" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{Message}}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn {{buttonClass}}" data-dismiss="modal">Close</button>
+                                <button type="button" (click)="onSubmit()" id="buttonSubmit" class="btn btn-primary" data-dismiss="modal" #buttonSubmit>Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="Products">
+    <ng-container *ngFor="let product of Product">
+        <div class="MYcard">
+            <img role="button" [routerLink]="['/ProductDetials', product.id]" src="{{product.ImageURL}}" alt="{{product.ImageURL}}">
+            <h3 style="margin-bottom: 0px;">{{product.Title}}</h3>
+            <h3 style="margin-top: 0px;">{{product.Price}}$</h3>
+            <div class="addToCart">
+                <select name="Quantaty" id="QuantatyNumber-{{product.id}}">
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <ng-template ngFor let-item [ngForOf]="counter(product.Quantity)">                        
+                        <option value="{{item}}">{{item}}</option>
+                    </ng-template>
+                </select>
+                <button type="button" (click)="CartConnection.AddToCart(product.id, product.Price )" class="btn btn-primary">Add To Cart</button>
+            </div>            
+        </div>
+        <div class="space"></div>
+    </ng-container>
+</div>
