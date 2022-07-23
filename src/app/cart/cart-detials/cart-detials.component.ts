@@ -110,4 +110,7 @@ export class CartDetialsComponent implements OnInit, OnDestroy {
   changeTest(event : Event){
     console.log(event);
   }
+  BackToMainPage(){
+    this.router.navigate(['/ProductList']);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
 export class ConfirmComponent implements OnInit, OnDestroy {
   @Input('totalPrice') totalPrice : number = 0;
   @Input('FullName') FullName : string = 'test';
+  
+  @Output('BackToMainPage') BackToMainPage = new EventEmitter<void>();
 
   subscribe !: Subscription;
   constructor(private route : ActivatedRoute) {
@@ -23,6 +25,9 @@ export class ConfirmComponent implements OnInit, OnDestroy {
     //this.subscribe.unsubscribe();
   }
   ngOnInit(): void {
+  }
+  functionOutput(){
+    this.BackToMainPage.emit();
   }
 
 }
