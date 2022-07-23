@@ -22,7 +22,7 @@ export class ProductlistComponent implements OnInit, OnDestroy {
     })
   }
   Product: Product[] = [{ id: 0, ImageURL: "", Price: 0, Quantity: 0, Title: "", Discriptions: "" }];
-
+  
   ngOnInit(): void { }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe();

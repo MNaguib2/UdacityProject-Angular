@@ -11,9 +11,17 @@
                         <option value="{{item}}">{{item}}</option>
                     </ng-template>
                 </select>
-                <button type="button" (click)="CartConnection.AddToCart(product.id, product.Price )" class="btn btn-primary">Add To Cart</button>
+                <button type="button" (click)="CartConnection.AddToCart(product.id, product.Price )" class="btn btn-primary"
+                data-toggle="modal" data-target=".bd-example-modal-sm">Add To Cart</button>
             </div>            
         </div>
         <div class="space"></div>
     </ng-container>
 </div>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        {{CartConnection.MesageConfirm}}
+      </div>
+    </div>
+  </div>

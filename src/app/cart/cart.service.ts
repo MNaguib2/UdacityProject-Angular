@@ -14,15 +14,15 @@ export class CartService {
        return this.http.get<Cart[]>(`${environment.apiHost}cart`);
     }
 
-
+    MesageConfirm !: string;
     AddToCart(idProduct: number, price: number) {
         this.http.get<Cart[]>(`${environment.apiHost}cart`).subscribe((data: Cart[]) => {
            if (data) this.Carts = data;
            const QuantitySelected: HTMLSelectElement = $(`#QuantatyNumber-${idProduct}`)[0] as unknown as HTMLSelectElement
            if (QuantitySelected.value === "") {
-             console.log("Please Select Valid Quantity");
+             this.MesageConfirm= 'Please Select Valid Quantity';
            } else {
-     
+              this.MesageConfirm= 'Product add To Cart Successful';
              if (this.Carts.find(element => element.IdProduct == idProduct) != undefined) {
                 this.updateCart(this.Carts.find(element => element.IdProduct == idProduct) as Cart , +QuantitySelected.value, price);
              } else {
@@ -54,5 +54,8 @@ export class CartService {
           this.http.delete(`${environment.apiHost}cart/${id[index]}`).subscribe();
           
         }        
+       }
+       reomveFromCartService(id: number){
+        return this.http.delete(`${environment.apiHost}cart/${id}`);
        }
 }

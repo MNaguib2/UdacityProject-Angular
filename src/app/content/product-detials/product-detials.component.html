@@ -14,9 +14,18 @@
                 </ng-template>
             </select>
             <button type="button" 
-            (click)="CartConnection.AddToCart(product.id, product.Price)" class="btn btn-primary w-50">Add To Cart</button>
+            (click)="CartConnection.AddToCart(product.id, product.Price)" class="btn btn-primary w-50"
+            data-toggle="modal" data-target=".bd-example-modal-sm">Add To Cart</button>
         </div>   
         <a [routerLink]="['/ProductList']">Back to Product List</a>
         </div>
     </div>
+</div>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      Product add To Cart Successful
+    </div>
+  </div>
 </div>

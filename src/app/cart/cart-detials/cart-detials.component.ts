@@ -18,12 +18,15 @@ export class CartDetialsComponent implements OnInit, OnDestroy {
   Address !: string;
   Credit !: number;
   modelTitle !: string;
+  id !:margCartClass;
+  ConfirmDelete !: string;
+  confirmPage : boolean = true;
 
   buttonClass : string = "btn-secondary";
   Message : string = 'Are You Sure Confirm Purchase';
 
   constructor(private CartService: CartService, private ProductConnection: ProductService, 
-                  private router: Router, private route : ActivatedRoute,) { }
+                  private router: Router, private route : ActivatedRoute,) {}
   totalPrice: number = 0;
 
   // carts: Cart[] = [{ id: 0, IdProduct: 0, Quantaty: 0, TotallPrice: 0 }];
@@ -69,9 +72,12 @@ export class CartDetialsComponent implements OnInit, OnDestroy {
   }
   onSubmit(){
     if(this.marge.length > 0){
+      // console.log(this.marge.length);
+      // console.log(this.Confirm);
       let ids = this.marge.map(element => element.id);
       this.CartService.clearCart(ids);
-      this.router.navigate(['/confirmPurchase'], {relativeTo: this.route , queryParams: {FullName: this.Confirm.value.FullName, totalPrice : this.totalPrice}});
+      this.confirmPage = false;
+      //this.router.navigate(['/confirmPurchase'], {relativeTo: this.route , queryParams: {FullName: this.Confirm.value.FullName, totalPrice : this.totalPrice}});
     }else{
 
     }    
@@ -89,5 +95,19 @@ export class CartDetialsComponent implements OnInit, OnDestroy {
       this.modelTitle = 'text-danger';
     }
   }
-
+  RemoveFromCart(id: margCartClass): void{
+    this.CartService.reomveFromCartService(id.id).subscribe(data => {
+      //console.log(data);
+    })
+    this.ConfirmDelete = '';
+    this.totalPrice = this.totalPrice - id.TotallPrice;
+    this.marge.splice(this.marge.findIndex(element => element.id === id.id), 1);
+  }
+  MessageFromCart(data : margCartClass){
+    this.ConfirmDelete = `Are You sure Want Delete ${data.ProductDetials.Title}`
+    this.id = data;
+  }
+  changeTest(event : Event){
+    console.log(event);
+  }
 }

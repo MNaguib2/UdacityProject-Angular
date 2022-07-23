@@ -13,6 +13,19 @@ BootStrap :- `npm i bootstrap@4.0.0`
 popper.js : - `npm i popper.js@1.12.9`
 JQuery : -`npm i jquery@3.2.1`  , `npm i @types/jquery@3.2.1 -D` To work with TypeScript
 
+# structure App
+this app content of four module 
+
+first app.module this is main module that collection all module in this 
+
+second  core.module this content of all package use in all module this content of aggregate to all package share
+
+third name content.module this is responsible about two component ProductList and Product details additional to one service Product to can get data from or to database and all relationship related to product between database 
+too in this module content of product.model to define object about all properties product
+
+fourth name cart.module tjis content of component cart detials to show all product you add to cart and fields to made confirm process purchase and confirm component to show all invoice additional to cart.service to can get data from or to database and all relationship related to cart between database 
+too in this module cart of cart.model to define object about all properties cart
+
 
 ## Development server
 

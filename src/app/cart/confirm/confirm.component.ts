@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -8,19 +8,19 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit, OnDestroy {
-  FullName : string = 'test';
-  totalPrice : number = 0;
+  @Input('totalPrice') totalPrice : number = 0;
+  @Input('FullName') FullName : string = 'test';
 
   subscribe !: Subscription;
   constructor(private route : ActivatedRoute) {
-    this.subscribe = this.route.queryParams.subscribe(data => {
-      console.log(data);
-      this.FullName = data['FullName'];
-      this.totalPrice = data['totalPrice'];
-    })
+    // this.subscribe = this.route.queryParams.subscribe(data => {
+    //   //console.log(data);
+    //   this.FullName = data['FullName'];
+    //   this.totalPrice = data['totalPrice'];
+    // })
    }
    ngOnDestroy(): void {
-    this.subscribe.unsubscribe();
+    //this.subscribe.unsubscribe();
   }
   ngOnInit(): void {
   }

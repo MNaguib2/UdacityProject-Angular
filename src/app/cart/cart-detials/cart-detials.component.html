@@ -1,3 +1,4 @@
+<ng-container *ngIf="confirmPage else pageConfirm">
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-8 col-12 col-sm-12 p-0">
@@ -13,8 +14,10 @@
                             <h4>{{data.ProductDetials.Title}}</h4>
                             <p>${{data.ProductDetials.Price}}</p>
                             <p class="d-inline col-lg-1 col-md-2 col-sm-4 col-3 p-0">Amount </p>
-                            <input type="number" class="col-lg-6 col-md-5 col-sm-6 col-6 p-0" value="{{data.Quantaty}}"
-                                (change)="changeNumber(data, $event)">
+                            <input type="number" class="col-lg-6 col-md-5 col-sm-6 col-6 p-0" min="1"
+                                value="{{data.Quantaty}}" (change)="changeNumber(data, $event)">
+                            <button type="button" class="btn btn-danger mt-1" data-toggle="modal"
+                                data-target="#exampleModalCenter" (click)="MessageFromCart(data)">Remove</button>
                         </div>
                     </div>
                 </ng-template>
@@ -27,7 +30,7 @@
                 <div class="form-group">
                     <label for="exampleInputName">Full Name</label>
                     <input type="text" class="form-control" id="FullName" placeholder="(minimum 6 characters)"
-                        minlength="6" required [(ngModel)]="FullName" name="FullName">
+                        minlength="6" required [(ngModel)]="FullName" name="FullName" (ngModelChange)="changeTest($event)">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputAddress">Address</label>
@@ -44,30 +47,59 @@
                     <small id="CreditHelp" class="form-text text-muted">We'll never share your payment Detials with
                         anyone else.</small>
                 </div>
-                <button type="button" class="btn btn-primary" [disabled]="!f.valid" data-toggle="modal" (click)="changeButton()"
-                    data-target="#exampleModal">Submit</button>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title {{modelTitle}}" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                {{Message}}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn {{buttonClass}}" data-dismiss="modal">Close</button>
-                                <button type="button" (click)="onSubmit()" id="buttonSubmit" class="btn btn-primary" data-dismiss="modal" #buttonSubmit>Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button type="button" class="btn btn-primary" [disabled]="!f.valid" data-toggle="modal"
+                    (click)="changeButton()" data-target="#Purches">Submit</button>
             </form>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ConfirmDelete}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="RemoveFromCart(id)">Yes
+                        Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="Purches" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title {{modelTitle}}" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{Message}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn {{buttonClass}}" data-dismiss="modal">Close</button>
+                    <button type="button" (click)="onSubmit()" id="buttonSubmit" class="btn btn-primary"
+                        data-dismiss="modal" #buttonSubmit>Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+</ng-container>
+
+
+<ng-template #pageConfirm>
+    <app-confirm [FullName]="FullName" [totalPrice]="totalPrice"></app-confirm>
+</ng-template>
